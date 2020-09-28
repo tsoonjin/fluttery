@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/homepage.dart';
 import 'package:flutter_app/helloworld.dart';
+import 'package:flutter_app/location.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // home: MyHomePage(title: 'Flutter My Demo Home Page'),
-      home: RandomWords()
+      home: location
     );
   }
 }
