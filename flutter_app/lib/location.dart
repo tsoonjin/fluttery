@@ -42,10 +42,7 @@ Widget titleSection = Container(
         ),
       ),
       /*3*/
-      Icon(
-        Icons.star,
-        color: Colors.red[500],
-      ),
+      FavWidget(),
       Text('41'),
     ],
   ),
@@ -105,4 +102,39 @@ Widget location(BuildContext context) {
       )
   );
 }
+
+class FavWidget extends StatefulWidget {
+  @override
+  _FavWidgetState createState() => _FavWidgetState();
+}
+
+class _FavWidgetState extends State<FavWidget> {
+  bool _isFav = false;
+
+  void _toggleFavorite() {
+    setState(() {
+      _isFav = !_isFav;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: EdgeInsets.all(0),
+          child: IconButton(
+            padding: EdgeInsets.all(0),
+            alignment: Alignment.centerRight,
+            icon: (_isFav ? Icon(Icons.star) : Icon(Icons.star_border)),
+            color: Colors.red[500],
+            onPressed: _toggleFavorite,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 
