@@ -1,5 +1,24 @@
 import 'package:flutter/material.dart';
 
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+
 Widget textSection = Container(
   padding: const EdgeInsets.all(32),
   child: Text(
@@ -48,24 +67,30 @@ Widget titleSection = Container(
   ),
 );
 
-Widget btnSection(Color color) {
+Widget btnSection(BuildContext ctx) {
+  final color = Theme.of(ctx).primaryColor;
   return Container(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _buildBtnColumn(color, Icons.call, 'CALL'),
-        _buildBtnColumn(color, Icons.near_me, 'ROUTE'),
-        _buildBtnColumn(color, Icons.share, 'SHARE'),
+        _buildBtnColumn(color, Icons.call, 'CALL', context: ctx),
+        _buildBtnColumn(color, Icons.near_me, 'ROUTE', context: ctx),
+        _buildBtnColumn(color, Icons.share, 'SHARE', context: ctx),
       ]
     )
   );
 }
 
-Column _buildBtnColumn(Color color, IconData icon, String label) {
+Column _buildBtnColumn(Color color, IconData icon, String label, { @required BuildContext context}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Icon(icon, color: color),
+      IconButton(
+        icon: Icon(icon, color: color),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => SecondRoute()));
+        }
+      ),
       Container(
         margin: EdgeInsets.only(top: 30),
         child: Text(
@@ -96,7 +121,7 @@ Widget location(BuildContext context) {
               )
             ),
             titleSection,
-            btnSection(Theme.of(context).primaryColor),
+            btnSection(context),
             textSection
           ]
       )
